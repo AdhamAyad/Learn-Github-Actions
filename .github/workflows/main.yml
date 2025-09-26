@@ -1,6 +1,14 @@
 name: first work flow
 
 on:
+  # Allow to run this work flow manually 
+  workflow_dispatch:
+  
+  pull_request:
+    branches:
+      - main
+      - stage
+      
   push:
     branches:
       - main
