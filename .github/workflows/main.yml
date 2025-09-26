@@ -1,0 +1,18 @@
+name: first work flow
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  
+jobs:
+  name-of-first-job:
+    runs-on: ubuntu-latest
+    steps:
+      # - name: first step
+      #   uses: actions/checkout@v3
+      - name: first step
+        run: echo "Hello From Github Actions"
+      
+      
