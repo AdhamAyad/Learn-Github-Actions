@@ -22,6 +22,8 @@ on:
       - stage
       
   push:
+    paths:
+      - "Terraform/**"
     branches:
       - main
       - dev
