@@ -3,7 +3,12 @@ name: first work flow
 on:
   # Allow to run this work flow manually 
   workflow_dispatch:
-  
+    inputs:
+      input-name:
+        description: 'test inputs in github actions'
+        default: 'test'
+        required: true
+        
   pull_request:
     branches:
       - main
@@ -19,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: first step
-        run: echo "Hello From Github Actions"
+        run: echo "Hello From Github Actions ${{github.event.input-name}}"
       - name: Checkout Repo
         uses: actions/checkout@v5.0.0
       - name: List Repo Files
