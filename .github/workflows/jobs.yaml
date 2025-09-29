@@ -1,0 +1,41 @@
+name: Jobs and Steps
+
+on:
+  workflow_dispatch:
+
+# needs → we use it in job to define dependencies
+# working-directory: ./test → we use it at the same level of step to changes the directory for the whole step before running any command
+# shell: bash → we use shell at the same level of step to change the command interpreter executing the run commands (Other Options: pwsh , cmd , powershell , python)
+jobs:
+    job_1:
+      runs-on: ubuntu-latest    
+      steps:
+        - name: first step
+          # The working-directory changes the directory for the whole step before running any command  
+          working-directory: /etc/
+          # The shell is the command interpreter executing the run commands (Other Options: pwsh , cmd , powershell , python)  
+          shell: bash 
+          run: echo "Hello 1"
+
+        - name: change dir
+          run: |
+            echo "ss"
+
+    job_2:
+      runs-on: ubuntu-latest
+      # Using 'needs' to define dependencies
+      needs: job_1
+      steps:
+        - name: sec step
+          # The working-directory changes the directory for the whole step before running any command  
+          working-directory: /etc/
+          # The shell is the command interpreter executing the run commands (Other Options: pwsh , cmd , powershell , python)  
+          shell: bash 
+          run: echo "hello 2"
+          
+    job_3:
+      runs-on: ubuntu-latest
+      needs: [job_1, job_2]
+      steps:
+        - name: third step
+          run: echo "hello 3"      
