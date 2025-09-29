@@ -1,0 +1,71 @@
+name: Triggers Types
+on:
+    ##################################################
+    ############### Webhook triggers #################
+    ##################################################
+    # Uses for CD (continuous delivery)
+    # Run workflow with each push         
+    push:
+        branches:
+            - "release/**"
+            - main
+        paths:
+            - "Terraform/**"
+            - "Backend/**" 
+            - "src/**"  
+    # Run workflow with each pull req          
+    pull_request:
+        branches:
+            - "release/**"
+            - main
+        paths:
+            - "Terraform/**"
+            - "Backend/**" 
+            - "src/**"
+    
+    ##################################################
+    ############## Scheduled webhooks ################
+    ##################################################  
+    # Uses for Reapeted Taskes
+    # Run every day at 12 AM AND 3:05 AM   
+    schedule:
+        - cron: "0 0 * * *"    
+        - cron: "5 3 * * *"
+
+    ##################################################
+    ############### Manual triggers ##################
+    ##################################################  
+    # Uses for CD (continuous Deployment) 
+    # Run Manually on Github GUI   
+    workflow_dispatch:
+        #${{inputs.environment} } :: Usage of Variable    
+        inputs:
+          environment: 
+            description: "Choose Environment"
+            default: "Development"
+            required: true
+            type: choice
+            options:
+                - Development
+                - Production
+                - Staging
+
+    # Run with API Calls Only
+    # Types used to identify which workflow to run
+    repository_dispatch:
+        types: [deploy_to_production ,deploy ,deployment]
+    
+jobs:
+    test-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: check out repo
+              uses: actions/checkout@v4
+            - name: print hello
+              run: echo "Hello"
+        
+
+        
+
+
+        

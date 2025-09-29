@@ -3,11 +3,6 @@ name: first work flow
 on:
   # Allow trigger using API By Outside Event
   repository_dispatch:
-    inputs:
-      input-name:
-        description: 'test inputs in github actions'
-        default: 'test'
-        required: false
   # Allow to run this work flow manually on github GUI
   workflow_dispatch:
     inputs:
