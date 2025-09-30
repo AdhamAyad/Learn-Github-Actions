@@ -1,0 +1,32 @@
+name: Backend Pipeline
+on:
+  workflow_dispatch:
+  push:
+    paths:
+        - "RealEstateAPI/**"
+    branches:
+        - main
+
+jobs:
+    ci_stage:
+        runs-on: ubuntu-latest
+        steps:
+            - name: check_out
+              uses: actions/checkout@v4
+
+            - name: Setup .NET
+              uses: actions/setup-dotnet@v4
+              with:
+                dotnet-version: 8.0.x  
+
+            - name: Restore dependencies
+              working-directory:   RealEstateAPI/RealEstateAPI/
+              run: dotnet restore
+
+            - name: Build  
+              run: dotnet build --no-restore
+              working-directory:   RealEstateAPI/RealEstateAPI/
+            
+            - name: Test
+              run: dotnet test --no-build --verbosity normal
+              working-directory:   RealEstateAPI/RealEstateAPI/
