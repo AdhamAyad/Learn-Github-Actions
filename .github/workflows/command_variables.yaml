@@ -1,0 +1,44 @@
+name: commands and variables
+
+on:
+    workflow_dispatch:
+
+jobs:
+    test_commands:
+        runs-on: ubuntu:latest
+        steps:
+            # warning message
+            - name: warning step
+              run: |
+                dis = true
+                if [[dis]]; then
+                  echo "::warning::dis founded"
+                fi  
+            # error message without stop pipline
+            - name: error step
+              run: |
+                diss = true
+                if [[diss]]; then
+                  echo "::debug::dis founded"
+                fi    
+            # make variable shares via steps in the same job  
+            - name: set env variable
+              run: echo "MY_ENV_VAR=world" >> $GITHUB_ENV     
+            # mask this variable run logs of work flow  
+            - name: use env variable
+              run: echo "::add-mask::Env variable is $MY_ENV_VAR"    
+
+    # make variable shared via jobs         
+    terraform-apply:
+      runs-on: ubuntu-latest
+      outputs:
+        plan-id: ${{ steps.generate-plan.outputs.plan_id }}
+      steps:
+        - id: generate-plan
+          run: echo "::set-output name=plan_id::tfplan123"
+
+    terraform-deploy:
+      runs-on: ubuntu-latest
+      needs: terraform-apply
+      steps:
+        - run: echo "Using Terraform plan ${{ needs.terraform-apply.outputs.plan-id }}"                  

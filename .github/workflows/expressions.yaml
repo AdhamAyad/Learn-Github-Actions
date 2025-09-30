@@ -1,0 +1,29 @@
+name: Expressions
+
+on:
+    workflow_dispatch:
+
+jobs:
+    test_expressions:
+        runs-on: ubuntu-latest     
+        # This expression ensures that this step does not run unless triggered by a push event
+        # success()   -> #runs only if all previous steps in the job succeeded
+        # failure()   -> runs only if any previous step in the job failed
+        # cancelled() -> runs only if the workflow/job was cancelled
+        # always()    -> runs regardless of previous steps' result (success, failure, or cancelled)
+        steps:
+            - name: if
+              run: echo "test if expression"
+              if: ${{github.event_name == 'push'}}   
+            - name: if success
+              run: echo "test if expression"
+              if: success()  
+            - name: if failure
+              run: echo "test if expression"
+              if: failure()
+            - name: if success
+              run: echo "test if expression"
+              if: cancelled()  
+            - name: if failure
+              run: echo "test if expression"
+              if: always()      
