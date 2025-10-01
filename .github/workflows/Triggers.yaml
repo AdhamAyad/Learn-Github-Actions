@@ -28,9 +28,9 @@ on:
     ##################################################  
     # Uses for Reapeted Taskes
     # Run every day at 12 AM AND 3:05 AM   
-    schedule:
-        - cron: "0 0 * * *"    
-        - cron: "5 3 * * *"
+    # schedule:
+    #     - cron: "0 0 * * *"    
+    #     - cron: "5 3 * * *"
 
     ##################################################
     ############### Manual triggers ##################
