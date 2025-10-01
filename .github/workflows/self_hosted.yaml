@@ -1,0 +1,10 @@
+name: Test Self Hosted Runner
+
+on:
+    workflow_dispatch:
+jobs:
+    test_hosted_runner:
+        runs-on: [self-hosted, onprim]  
+        steps:
+            - name: test
+              run: echo "Hello From Laptop"      
