@@ -1,0 +1,12 @@
+﻿{
+  "repositoryName": "AdhamAyad/Learn-Github-Actions",
+  "pipelineDirectory": "Learn-Github-Actions",
+  "workspaceDirectory": "Learn-Github-Actions/Learn-Github-Actions",
+  "repositories": {
+    "AdhamAyad/Learn-Github-Actions": {
+      "repositoryPath": "Learn-Github-Actions/Learn-Github-Actions",
+      "lastRunOn": "10/01/2025 19:33:05 +03:00"
+    }
+  },
+  "lastRunOn": "10/01/2025 19:33:05 +03:00"
+}
