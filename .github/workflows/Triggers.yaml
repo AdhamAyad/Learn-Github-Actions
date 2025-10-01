@@ -1,6 +1,16 @@
 name: Triggers Types
 on:
     ##################################################
+    ############### workflow trigger ################
+    ##################################################
+    # Use when we want to call this workflow srom onther one
+    workflow_call:
+        inputs:
+            username:
+                required: true
+                type: string
+                
+    ##################################################
     ############### Webhook triggers #################
     ##################################################
     # Uses for CD (continuous delivery)

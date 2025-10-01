@@ -1,5 +1,4 @@
 name: first work flow
-
 on:
   # Allow trigger using API By Outside Event
   repository_dispatch:
